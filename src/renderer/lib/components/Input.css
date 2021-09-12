@@ -1,0 +1,11 @@
+.root {
+  display: inline-block;
+  font-size: 1em;
+  margin: 0.5em;
+  padding: none;
+  outline: none;
+  border: none;
+  color: white;
+  border-bottom: 1px solid white;
+  background-color: rgb(39, 39, 39);
+}

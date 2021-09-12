@@ -1,0 +1,24 @@
+.root {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  width: 100%;
+  height: 1em;
+  margin: 0.5em;
+}
+
+.bar {
+  height: 100%;
+  background-color: white;
+}
+
+.value {
+  width: 3em;
+  height: 100%;
+  line-height: 100%;
+  margin-left: 0.5em;
+}
+
+.value::after {
+  content: '%';
+}

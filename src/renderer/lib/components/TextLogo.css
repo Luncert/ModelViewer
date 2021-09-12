@@ -1,0 +1,9 @@
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  white-space: pre;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 1em;
+}
