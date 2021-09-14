@@ -8,14 +8,7 @@ export const Channels = {
   UnmaximizeWindow: 'unmaximize-window',
   EnterFullScreen: 'enter-fullscreen',
   CloseWindow: 'close-window',
-  TerminalServer: {
-    Open: 'Open',
-    Write: 'Write',
-    Stdout: 'Stdout',
-    Stderr: 'Stderr',
-    Close: 'Close',
-    CloseAll: 'CloseAll'
-  }
+  OpenFile: 'open-file'
 }
 
 export const WINDOW_STATE = {

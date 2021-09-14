@@ -1,5 +1,5 @@
 import React, { Component, CSSProperties } from 'react';
-import { names } from '../util';
+import { names } from '../../view/util';
 import Divider from './Divider';
 
 const styles = require('./Modal.css') as any

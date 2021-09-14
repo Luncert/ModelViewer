@@ -1,7 +1,7 @@
-import { app, BrowserWindow, Menu, ipcMain, Tray } from 'electron'
+import { app, BrowserWindow, Menu, ipcMain, Tray, dialog } from 'electron'
 import { Channels, WINDOW_STATE } from '../common/Constants'
-import * as path from 'path'
-import * as url from 'url'
+import path from 'path'
+import url from 'url'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -87,24 +87,32 @@ function setupMessageChannels() {
     event.returnValue = fetchWindowState();
   })
   ipcMain.on(Channels.MinimizeWindow, (event) => {
-      if (mainWindow.minimizable) {
-        mainWindow.minimize()
-      }
-      event.returnValue = fetchWindowState()
+    if (mainWindow.minimizable) {
+      mainWindow.minimize()
+    }
+    event.returnValue = fetchWindowState()
   })
   ipcMain.on(Channels.MaximizeWindow, (event) => {
-      if (mainWindow.maximizable) {
-        mainWindow.maximize()
-      }
-      event.returnValue = fetchWindowState()
+    if (mainWindow.maximizable) {
+      mainWindow.maximize()
+    }
+    event.returnValue = fetchWindowState()
   })
   ipcMain.on(Channels.UnmaximizeWindow, (event) => {
-      mainWindow.unmaximize();
-      event.returnValue = fetchWindowState()
+    mainWindow.unmaximize();
+    event.returnValue = fetchWindowState()
   })
   ipcMain.on(Channels.CloseWindow, (event) => {
-      mainWindow.close()
-      event.returnValue = WINDOW_STATE.HIDDEN
+    mainWindow.close()
+    event.returnValue = WINDOW_STATE.HIDDEN
+  })
+  ipcMain.on(Channels.OpenFile, async (event) => {
+    let ret = await dialog.showOpenDialog({
+      title: 'Open Model File',
+      filters: [{name: 'Model Files', extensions: ['obj', 'fbx', 'gltf', 'json']}],
+      properties: ['openFile']}
+    )
+    event.returnValue = ret.filePaths
   })
   
   // listener window event

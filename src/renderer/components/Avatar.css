@@ -1,7 +1,0 @@
-.root {
-  display: inline-block;
-  width: 7em;
-  height: 7em;
-  margin: calc(1em - 2px);
-  border: 2px solid white;
-}
