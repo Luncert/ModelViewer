@@ -1,7 +1,9 @@
-import { app, BrowserWindow, Menu, ipcMain, Tray, dialog } from 'electron'
+import { app, BrowserWindow, Menu, ipcMain, Tray, dialog, session } from 'electron'
 import { Channels, WINDOW_STATE } from '../common/Constants'
 import path from 'path'
 import url from 'url'
+import ResourceServer from './ResourceServer'
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -143,6 +145,12 @@ function initTrayIcon() {
   // });
 }
 
+function setupResourceServer() {
+  const server = new ResourceServer()
+  session.defaultSession.setProxy(server.getProxy())
+  server.start()
+}
+
 // quit application when all windows are closed
 app.on('window-all-closed', () => {
   // on macOS it is common for applications to stay open until the user explicitly quits
@@ -160,6 +168,7 @@ app.on('activate', () => {
 app.on('ready', () => {
   createWindow()
   initTrayIcon()
+  setupResourceServer()
 })
 
 app.commandLine.appendSwitch('high-dpi-support', 'true');
